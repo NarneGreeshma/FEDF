@@ -2,17 +2,14 @@
 // ES6+ Features + Closures + Functional Programming
 // Immutability + Module Pattern
 // =======================================
-
 // Module Pattern
 const UserApp = (() => {
-  
   // Private Data
   let users = [
     { id: 1, name: "Ramya", age: 25 },
     { id: 2, name: "Krishna", age: 28 },
     { id: 3, name: "Sita", age: 22 }
   ];
-
   // Closure Counter
   const createCounter = () => {
     let count = 0;
@@ -22,11 +19,8 @@ const UserApp = (() => {
       return count;
     };
   };
-
   const userCounter = createCounter();
-
   return {
-
     // Display Users
     showUsers() {
       console.log("\nAll Users:");
@@ -34,7 +28,6 @@ const UserApp = (() => {
         console.log(`ID: ${user.id}, Name: ${user.name}, Age: ${user.age}`)
       );
     },
-
     // Add User (ES6 + Immutability)
     addUser(name, age) {
       const newUser = {
