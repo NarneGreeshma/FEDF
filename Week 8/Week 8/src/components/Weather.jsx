@@ -17,11 +17,10 @@ function Weather() {
       );
 
       if (!response.ok) {
-        throw new Error("Unable to fetch weather data");
+        throw new Error("Failed to fetch weather data");
       }
 
       const data = await response.json();
-
       setWeather(data.current_weather);
       setError("");
     } catch (err) {
@@ -45,13 +44,17 @@ function Weather() {
     return (
       <div className="loader-container">
         <div className="loader"></div>
-        <h2>Loading Weather...</h2>
+        <h2>Loading Weather Data...</h2>
       </div>
     );
   }
 
   if (error) {
-    return <h2>{error}</h2>;
+    return (
+      <div className="loader-container">
+        <h2>{error}</h2>
+      </div>
+    );
   }
 
   const temperature = isCelsius
@@ -78,16 +81,20 @@ function Weather() {
           </button>
         </div>
 
-        <h1>⛅ Weather Dashboard</h1>
+        <h1>Weather Information System</h1>
 
-        <h3>📍 Hyderabad</h3>
+        <p className="location">📍 Hyderabad</p>
 
         <p className="clock">
           🕒 {time.toLocaleTimeString()}
         </p>
 
+        <div className="weather-icon">
+          🌤️
+        </div>
+
         <div className="status">
-          ☀ Clear Sky
+          Live Weather Monitoring
         </div>
 
         <div className="temp">
@@ -98,18 +105,18 @@ function Weather() {
         <div className="weather-grid">
 
           <div className="info-card">
-            <h4>💨 Wind Speed</h4>
+            <h4>💨 Wind Velocity</h4>
             <p>{weather.windspeed} km/h</p>
           </div>
 
           <div className="info-card">
-            <h4>🧭 Direction</h4>
+            <h4>🧭 Wind Direction</h4>
             <p>{weather.winddirection}°</p>
           </div>
 
           <div className="info-card">
-            <h4>⏰ Updated</h4>
-            <p>{weather.time}</p>
+            <h4>🕒 Last Updated</h4>
+            <p>{new Date(weather.time).toLocaleTimeString()}</p>
           </div>
 
           <div className="info-card">
@@ -129,17 +136,7 @@ function Weather() {
 
         </div>
 
-        <div className="forecast">
-          <h3>📅 Weekly Forecast</h3>
-
-          <div className="forecast-row">
-            <div>Mon ☀️ 32°</div>
-            <div>Tue 🌤️ 30°</div>
-            <div>Wed 🌧️ 28°</div>
-            <div>Thu ☁️ 29°</div>
-            <div>Fri ☀️ 33°</div>
-          </div>
-        </div>
+        
 
         <button
           className="refresh-btn"
